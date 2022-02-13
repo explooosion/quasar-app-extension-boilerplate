@@ -7,10 +7,10 @@
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/explooosion/quasar-app-extension-boilerplate"
   },
-  "bugs": "",
-  "homepage": "",
+  "bugs": "https://github.com/explooosion/quasar-app-extension-boilerplate/issues",
+  "homepage": "https://github.com/explooosion/quasar-app-extension-boilerplate",
   "dependencies": {
     "quasar-ui-my-ui": "^0.0.1"
   },
