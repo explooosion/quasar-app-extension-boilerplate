@@ -1,0 +1,6 @@
+**/dist
+**/.quasar
+**/node_modules
+.eslintrc.js
+
+/ui/build

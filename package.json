@@ -1,0 +1,43 @@
+{
+  "name": "my-ui",
+  "version": "1.0.4",
+  "author": "Robby <ta7382@gmail.com>",
+  "description": "My awesome component",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext .js,.vue ui/src && eslint --ext .js,.vue ui/dev/src",
+    "lint:fix": "eslint --ext .js,.vue ui/src --fix && eslint --ext .js,.vue ui/dev/src --fix",
+    "stylelint": "stylelint ui/{src,dev/src}/**/**/**/*.{vue,css,sass,scss}",
+    "stylelint:fix": "stylelint ui/{src,dev/src}/**/**/**/*.{vue,css,sass,scss} --fix",
+    "lint:all": "npm run lint && npm run stylelint",
+    "lint:all:fix": "npm run lint:fix && npm run stylelint:fix",
+    "format": "prettier --write \"ui/{src,dev/src}/**/*.{js,vue,scss}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "homepage": "",
+  "devDependencies": {
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.14.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.1.0",
+    "eslint-plugin-vue": "^7.15.0",
+    "prettier": "^2.3.2",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0"
+  }
+}
