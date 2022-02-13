@@ -8,6 +8,7 @@ const json = require('@rollup/plugin-json')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
 const vue = require('rollup-plugin-vue')
+const postcss = require('rollup-plugin-postcss')
 const commonjs = require('@rollup/plugin-commonjs')
 
 const { version } = require('../package.json')
@@ -19,14 +20,17 @@ const rollupPlugins = [
   replace({
     preventAssignment: false,
     values: {
-      __UI_VERSION__: `'${ version }'`
+      __UI_VERSION__: `'${version}'`
     }
   }),
   nodeResolve({
     extensions: ['.js', '.vue'],
     preferBuiltins: false
   }),
-  vue(),
+  vue({
+    preprocessStyles: true
+  }),
+  postcss(),
   commonjs(),
   json(),
   buble({
@@ -94,18 +98,18 @@ build(builds)
  * Helpers
  */
 
-function pathResolve (_path) {
+function pathResolve(_path) {
   return path.resolve(__dirname, _path)
 }
 
 // eslint-disable-next-line no-unused-vars
-function addAssets (builds, type, injectName) {
+function addAssets(builds, type, injectName) {
   const
     files = fs.readdirSync(pathResolve('../../ui/src/components/' + type)),
-    plugins = [ buble(bubleConfig) ],
+    plugins = [buble(bubleConfig)],
     outputDir = pathResolve(`../dist/${type}`)
 
-    fse.mkdirp(outputDir)
+  fse.mkdirp(outputDir)
 
   files
     .filter(file => file.endsWith('.js'))
@@ -130,16 +134,16 @@ function addAssets (builds, type, injectName) {
     })
 }
 
-function build (builds) {
+function build(builds) {
   return Promise
     .all(builds.map(genConfig).map(buildEntry))
     .catch(buildUtils.logError)
 }
 
-function genConfig (opts) {
+function genConfig(opts) {
   Object.assign(opts.rollup.input, {
     plugins: rollupPlugins,
-    external: [ 'vue', 'quasar' ]
+    external: ['vue', 'quasar']
   })
 
   Object.assign(opts.rollup.output, {
@@ -150,12 +154,12 @@ function genConfig (opts) {
   return opts
 }
 
-function addExtension (filename, ext = 'min') {
+function addExtension(filename, ext = 'min') {
   const insertionPoint = filename.lastIndexOf('.')
   return `${filename.slice(0, insertionPoint)}.${ext}${filename.slice(insertionPoint)}`
 }
 
-function buildEntry (config) {
+function buildEntry(config) {
   return rollup
     .rollup(config.rollup.input)
     .then(bundle => bundle.generate(config.rollup.output))
@@ -197,7 +201,7 @@ function buildEntry (config) {
     })
 }
 
-function injectVueRequirement (code) {
+function injectVueRequirement(code) {
   // eslint-disable-next-line
   const index = code.indexOf(`Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue`)
 

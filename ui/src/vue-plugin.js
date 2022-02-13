@@ -8,4 +8,4 @@ function install(app) {
   app.component(Example.name, Example);
 }
 
-export { version, Component, install };
+export { version, Component, Example, install };
